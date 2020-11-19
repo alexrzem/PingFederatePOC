@@ -53,4 +53,6 @@ services:
       - ${HOME}/projects/devops/PingFederatePOC/server-profile/pingfederate:/opt/in
       - ${HOME}/projects/devops/volumes/pingfederate:/opt/out
      # - pingfederate-out:/opt/out
-     
+    
+networks:
+    pingnet:
