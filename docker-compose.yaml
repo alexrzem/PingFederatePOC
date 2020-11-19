@@ -86,5 +86,6 @@ networks:
     pingnet:
 
 volumes:
-  pingfederate-out:
-  pingdirectory-out:
+    pingfederate-out:
+    pingdirectory-out:
+  
