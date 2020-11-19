@@ -37,7 +37,7 @@ version: "2.4"
 services:
   pingfederate:
     image: ${PING_IDENTITY_DEVOPS_REGISTRY}/pingfederate:${PING_IDENTITY_DEVOPS_TAG}
-    command: wait-for pingdirectory:389 -t 900 -- entrypoint.sh start-server
+   # command: wait-for pingdirectory:389 -t 900 -- entrypoint.sh start-server
     environment:
       - VERBOSE=false
     env_file:
