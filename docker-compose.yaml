@@ -42,6 +42,7 @@ services:
       - VERBOSE=false
       - PF_ADMIN_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
       - PF_ENGINE_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
+      - PF_ENGINE_PRIVATE_HOSTNAME=poc-hines.ping-eng.com
       - PF_CONSOLE_AUTHENTICATION=LDAP
       - PF_ADMIN_API_AUTHENTICATION=LDAP
       - PD_ENGINE_PUBLIC_HOSTNAME=pingdirectory
