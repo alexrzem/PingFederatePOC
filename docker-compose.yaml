@@ -81,6 +81,20 @@ services:
       - "8443:8443"
     networks:
       - pingnet
+          
+  pingdelegator:
+    image: ${PING_IDENTITY_DEVOPS_REGISTRY}/pingdelegator:${PING_IDENTITY_DEVOPS_TAG}
+    environment:
+      - PD_ENGINE_PUBLIC_PORT=1443
+    env_file:
+      - ${HOME}/.pingidentity/devops
+    ports:
+      - "6443:6443"
+    networks:
+      - pingnet
+    volumes:  
+     - pingdelegator-out:/opt/out
+     - ${HOME}/projects/devops/PingFederatePOC/server-profile/pingdelegator:/opt/in
     
 networks:
     pingnet:
@@ -88,4 +102,5 @@ networks:
 volumes:
     pingfederate-out:
     pingdirectory-out:
+    pingdelegator-out:
   
