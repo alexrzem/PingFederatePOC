@@ -40,6 +40,15 @@ services:
     command: wait-for pingdirectory:389 -t 900 -- entrypoint.sh start-server
     environment:
       - VERBOSE=false
+      - PF_ADMIN_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
+      - PF_ENGINE_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
+      - PF_CONSOLE_AUTHENTICATION=LDAP
+      - PF_ADMIN_API_AUTHENTICATION=LDAP
+      - PD_ENGINE_PUBLIC_HOSTNAME=pingdirectory
+      - PD_ENGINE_PRIVATE_HOSTNAME=pingdirectory
+      - PD_DELEGATOR_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
+      - PD_DELEGATOR_PUBLIC_PORT=6443
+      
     env_file:
       # Configuration file created when setup.sh (Getting-started project root directory) is first run to source
       # devops user/key details for evaluation licenses and for docker image/git tags
@@ -56,6 +65,14 @@ services:
       
   pingdirectory:
     image: ${PING_IDENTITY_DEVOPS_REGISTRY}/pingdirectory:${PING_IDENTITY_DEVOPS_TAG}
+    environment:
+      - VERBOSE=false
+      - PD_ENGINE_PUBLIC_HOSTNAME=pingdirectory
+      - PD_ENGINE_PRIVATE_HOSTNAME=pingdirectory
+      - PF_ADMIN_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
+      - PF_ENGINE_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
+      - PD_DELEGATOR_PUBLIC_HOSTNAME=poc-hines.ping-eng.co
+      - PD_DELEGATOR_PUBLIC_PORT=6443
     env_file:
       - ${HOME}/.pingidentity/devops
     ulimits:
@@ -85,6 +102,9 @@ services:
   pingdelegator:
     image: ${PING_IDENTITY_DEVOPS_REGISTRY}/pingdelegator:${PING_IDENTITY_DEVOPS_TAG}
     environment:
+      - PF_ENGINE_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
+      - PF_ENGINE_PUBLIC_PORT=9031
+      - PD_ENGINE_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
       - PD_ENGINE_PUBLIC_PORT=1443
     env_file:
       - ${HOME}/.pingidentity/devops
