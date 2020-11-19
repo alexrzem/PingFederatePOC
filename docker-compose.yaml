@@ -1,0 +1,56 @@
+version: "2.4"
+# The server profiles used in this example are intended for use with edge versions of the product image only.
+
+#-------------------------------------------------------------------------------------
+#- Ping Identity Simple Stack integrated demo
+#-
+#-     login  console            app                console           rest    ldaps
+#-     9031   9999               6443                 8443            1443    1636
+#-      |      |                  |                    |               |       |
+#-   +---------------+    +---------------+    +---------------+    +---------------+
+#-   | PingFederate  |    | PingDelegator |    |PingDataConsole|    | PingDirectory |
+#-   +---------------+    +---------------+    +---------------+    +---------------+
+#-
+#-  PingFederate Console                         PingDataConsole (PingDirectory)
+#-  --------------------                         -------------------------------
+#-  https://hostname:9999/pingfederate/app      https://hostname:8443
+#-    Username: administrator                        Server: pingdirectory
+#-    Password: 2FederateM0re                      Username: administrator
+#-                                                 Password: 2FederateM0re
+#-
+#-  PingDelegator App
+#-  -----------------
+#-  https://hostname:6443
+#-    Username: administrator
+#-    Password: 2FederateM0re
+#-
+#- NOTE: If you receive an error after pingdelegator login: 'You could not be authenticated'
+#-       some browsers (i.e. Firefox) may require you to accept cert on each port.
+#-       You should be able to goto https://hostname:1443 and accept the cert to continue.
+#-
+# Example: Examples below for mounting local directories for inbound server profile and persisting
+    #          server build.  The local /opt/out directory must be empty when building new server
+    #             /opt/out - Resulting server build
+    #             /opt/in  - Inbound server-profile detail in liue of SERVER_PROFILE_URL (must be commented out)
+#-------------------------------------------------------------------------------------
+
+services:
+  pingfederate:
+    image: ${PING_IDENTITY_DEVOPS_REGISTRY}/pingfederate:${PING_IDENTITY_DEVOPS_TAG}
+    command: wait-for pingdirectory:389 -t 900 -- entrypoint.sh start-server
+    environment:
+      - VERBOSE=false
+    env_file:
+      # Configuration file created when setup.sh (Getting-started project root directory) is first run to source
+      # devops user/key details for evaluation licenses and for docker image/git tags
+      - ${HOME}/.pingidentity/devops
+    ports:
+      - "9031:9031"
+      - "9999:9999"
+    networks:
+      - pingnet
+    volumes:
+      - ${HOME}/projects/devops/PingFederatePOC/server-profile/pingfederate:/opt/in
+      - ${HOME}/projects/devops/volumes/pingfederate:/opt/out
+     # - pingfederate-out:/opt/out
+     
