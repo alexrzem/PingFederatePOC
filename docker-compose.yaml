@@ -71,7 +71,7 @@ services:
       - PD_ENGINE_PRIVATE_HOSTNAME=pingdirectory
       - PF_ADMIN_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
       - PF_ENGINE_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
-      - PD_DELEGATOR_PUBLIC_HOSTNAME=poc-hines.ping-eng.co
+      - PD_DELEGATOR_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
       - PD_DELEGATOR_PUBLIC_PORT=6443
     env_file:
       - ${HOME}/.pingidentity/devops
