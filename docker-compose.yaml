@@ -60,9 +60,9 @@ services:
     networks:
       - pingnet
     volumes:
-      # - pingfederate-out:/opt/out
+      - pingfederate-out:/opt/out
       - ${HOME}/projects/devops/PingFederatePOC/server-profile/pingfederate:/opt/in
-      - ${HOME}/projects/devops/volumes/pingfederate:/opt/out
+      # - ${HOME}/projects/devops/volumes/pingfederate:/opt/out
       
   pingdirectory:
     image: ${PING_IDENTITY_DEVOPS_REGISTRY}/pingdirectory:${PING_IDENTITY_DEVOPS_TAG}
@@ -90,9 +90,8 @@ services:
     networks:
       - pingnet
     volumes:
-      # - pingdirectory-out:/opt/out
+      - pingdirectory-out:/opt/out
       - ${HOME}/projects/devops/PingFederatePOC/server-profile/pingdirectory:/opt/in
-      - ${HOME}/projects/devops/volumes/pingdirectory:/opt/out
 
   pingdataconsole:
     image: ${PING_IDENTITY_DEVOPS_REGISTRY}/pingdataconsole:${PING_IDENTITY_DEVOPS_TAG}
@@ -104,11 +103,10 @@ services:
   pingdelegator:
     image: ${PING_IDENTITY_DEVOPS_REGISTRY}/pingdelegator:${PING_IDENTITY_DEVOPS_TAG}
     environment:
-      PD_DELEGATOR_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
-      PF_ENGINE_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
-      PF_ENGINE_PUBLIC_PORT=9031
-      PD_ENGINE_PUBLIC_HOSTNAME=pingdirectory
-      PD_ENGINE_PUBLIC_PORT=1443
+      - PF_ENGINE_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
+      - PF_ENGINE_PUBLIC_PORT=9031
+      - PD_ENGINE_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
+      - PD_ENGINE_PUBLIC_PORT=1443
     env_file:
       - ${HOME}/.pingidentity/devops
     ports:
@@ -116,15 +114,14 @@ services:
     networks:
       - pingnet
     volumes:  
-      - ${HOME}/projects/devops/PingFederatePOC/server-profile/pingdelegator:/opt/in
-      - ${HOME}/projects/devops/volumes/pingdelegator:/opt/out
-      # - pingdelegator-out:/opt/out
+     - pingdelegator-out:/opt/out
+     - ${HOME}/projects/devops/PingFederatePOC/server-profile/pingdelegator:/opt/in
     
 networks:
     pingnet:
 
-# volumes:
-#    pingfederate-out:
-#    pingdirectory-out:
-#    pingdelegator-out:
+volumes:
+    pingfederate-out:
+    pingdirectory-out:
+    pingdelegator-out:
   
