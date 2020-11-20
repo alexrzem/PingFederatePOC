@@ -60,9 +60,8 @@ services:
     networks:
       - pingnet
     volumes:
-      - pingfederate-out:/opt/out
       - ${HOME}/projects/devops/PingFederatePOC/server-profile/pingfederate:/opt/in
-      # - ${HOME}/projects/devops/volumes/pingfederate:/opt/out
+      - ${HOME}/projects/devops/volumes/pingfederate:/opt/out
       
   pingdirectory:
     image: ${PING_IDENTITY_DEVOPS_REGISTRY}/pingdirectory:${PING_IDENTITY_DEVOPS_TAG}
@@ -90,8 +89,8 @@ services:
     networks:
       - pingnet
     volumes:
-      - pingdirectory-out:/opt/out
       - ${HOME}/projects/devops/PingFederatePOC/server-profile/pingdirectory:/opt/in
+      - ${HOME}/projects/devops/volumes/pingdirectory:/opt/out
 
   pingdataconsole:
     image: ${PING_IDENTITY_DEVOPS_REGISTRY}/pingdataconsole:${PING_IDENTITY_DEVOPS_TAG}
@@ -114,14 +113,9 @@ services:
     networks:
       - pingnet
     volumes:  
-     - pingdelegator-out:/opt/out
-     - ${HOME}/projects/devops/PingFederatePOC/server-profile/pingdelegator:/opt/in
+      - ${HOME}/projects/devops/PingFederatePOC/server-profile/pingdelegator:/opt/in
+      - ${HOME}/projects/devops/volumes/pingdelegator:/opt/out
     
 networks:
     pingnet:
 
-volumes:
-    pingfederate-out:
-    pingdirectory-out:
-    pingdelegator-out:
-  
