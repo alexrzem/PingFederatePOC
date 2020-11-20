@@ -116,14 +116,14 @@ services:
     networks:
       - pingnet
     volumes:  
-     # - pingdelegator-out:/opt/out
-     - ${HOME}/projects/devops/PingFederatePOC/server-profile/pingdelegator:/opt/in
-     - ${HOME}/projects/devops/volumes/pingdelegator:/opt/out
+      - ${HOME}/projects/devops/PingFederatePOC/server-profile/pingdelegator:/opt/in
+      - ${HOME}/projects/devops/volumes/pingdelegator:/opt/out
+      # - pingdelegator-out:/opt/out
     
 networks:
     pingnet:
 
-#volumes:
+# volumes:
 #    pingfederate-out:
 #    pingdirectory-out:
 #    pingdelegator-out:
