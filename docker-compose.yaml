@@ -43,6 +43,8 @@ services:
       - PF_ADMIN_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
       - PF_ENGINE_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
       - PF_ENGINE_PRIVATE_HOSTNAME=poc-hines.ping-eng.com
+      - PF_ENGINE_PUBLIC_PORT=9031
+      - PF_ENGINE_PORT=9031
       - PF_CONSOLE_AUTHENTICATION=LDAP
       - PF_ADMIN_API_AUTHENTICATION=LDAP
       - PD_ENGINE_PUBLIC_HOSTNAME=pingdirectory
@@ -71,6 +73,8 @@ services:
       - PD_ENGINE_PRIVATE_HOSTNAME=pingdirectory
       - PF_ADMIN_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
       - PF_ENGINE_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
+      - PF_ENGINE_PUBLIC_PORT=9031
+      - PF_ENGINE_PORT=9031
       - PD_DELEGATOR_PUBLIC_HOSTNAME=poc-hines.ping-eng.com
       - PD_DELEGATOR_PUBLIC_PORT=6443
     env_file:
